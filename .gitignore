@@ -1,0 +1,10 @@
+
+/Drivers
+MDK-ARM/JLinkLog.txt
+*.pan39
+*.o
+*.d
+*.htm
+*.map
+MDK-ARM/t1/t1_t1.dep
+MDK-ARM/t1/t1.axf
