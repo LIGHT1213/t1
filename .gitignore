@@ -8,3 +8,7 @@ MDK-ARM/JLinkLog.txt
 *.map
 MDK-ARM/t1/t1_t1.dep
 MDK-ARM/t1/t1.axf
+MDK-ARM/t1.uvguix.Admin
+MDK-ARM/JLinkSettings.ini
+MDK-ARM/t1/t1.hex
+MDK-ARM/t1/t1.hex
