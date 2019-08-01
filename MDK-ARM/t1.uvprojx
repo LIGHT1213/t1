@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB,USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;   ../Drivers/STM32F1xx_HAL_Driver/Inc;   ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;   ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;   ../Drivers/CMSIS/Include;   ..\User\H</IncludePath>
+              <IncludePath>../Inc;          ../Drivers/STM32F1xx_HAL_Driver/Inc;          ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;          ../Drivers/CMSIS/Device/ST/STM32F1xx/Include;          ../Drivers/CMSIS/Include;          ..\User\H</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -513,6 +513,16 @@
               <FileType>1</FileType>
               <FilePath>..\User\C\User_main.c</FilePath>
             </File>
+            <File>
+              <FileName>User_CallBack.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\C\User_CallBack.c</FilePath>
+            </File>
+            <File>
+              <FileName>User_Uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\C\User_Uart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -522,6 +532,16 @@
               <FileName>User_main.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\H\User_main.h</FilePath>
+            </File>
+            <File>
+              <FileName>User_CallBack.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\H\User_CallBack.h</FilePath>
+            </File>
+            <File>
+              <FileName>User_Uart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\H\User_Uart.h</FilePath>
             </File>
           </Files>
         </Group>

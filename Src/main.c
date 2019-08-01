@@ -159,7 +159,6 @@ int fputc(int ch,FILE *f)
 {
     uint8_t temp[1]={ch};
     HAL_UART_Transmit(&huart1,temp,1,10);        //UartHandle是串口的句柄
-		HAL_Delay(2);
 		return ch;
 }
 
@@ -167,7 +166,6 @@ int fputc(int ch,FILE *f)
 PUTCHAR_PROTOTYPE
 {
 	HAL_UART_Transmit(&huart1,(uint8_t*)&ch,1,10);
-	HAL_Delay(2);
 	return ch;
 }
 
