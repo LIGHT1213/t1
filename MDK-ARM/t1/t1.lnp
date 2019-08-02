@@ -23,6 +23,7 @@
 "t1\user_main.o"
 "t1\user_callback.o"
 "t1\user_uart.o"
+"t1\user_pwm.o"
 --library_type=microlib --strict --scatter "t1\t1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

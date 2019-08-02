@@ -523,6 +523,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\C\User_Uart.c</FilePath>
             </File>
+            <File>
+              <FileName>User_PWM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\C\User_PWM.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -542,6 +547,11 @@
               <FileName>User_Uart.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\H\User_Uart.h</FilePath>
+            </File>
+            <File>
+              <FileName>User_PWM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\H\User_PWM.h</FilePath>
             </File>
           </Files>
         </Group>
