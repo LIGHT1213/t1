@@ -38,7 +38,7 @@ void User_main(void)
 		//printf("FUCK\r\n");
 	if(Is_CommandUpdate()==1)
 	{
-		PIDOut();
+		//PIDOut();
 		Clear_CommandUpdateStatus();
 	}
 //	ChannelOne_SetPositon(0);

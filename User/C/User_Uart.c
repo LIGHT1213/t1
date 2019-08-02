@@ -1,4 +1,5 @@
 #include "User_Uart.h"
+#include "User_PID.h"
 
 //公有变量
 
@@ -75,6 +76,8 @@ void _GetErrorUartCallBack(void)
 		HAL_UART_Receive_IT(&huart1,_GetErrorRXBuffer,7);
 		//指示收到新的指令
 		CommandUpdateStatus = 1;
+		//收到新指令立即执行PID
+		PIDOut();
 	}
 }
 
