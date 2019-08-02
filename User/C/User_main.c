@@ -41,8 +41,8 @@ void User_main(void)
 		PIDOut();
 		Clear_CommandUpdateStatus();
 	}
-//	ChannelOne_SetPositon(1);
-//	ChannelTwo_SetPositon(1);
+//	ChannelOne_SetPositon(0);
+//	ChannelTwo_SetPositon(0);
 	}
 	
 }
