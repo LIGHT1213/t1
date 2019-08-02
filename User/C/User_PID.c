@@ -1,7 +1,15 @@
 #include "User_PID.h"
-uint16_t x=104;   //74
-uint16_t y=92;   //64
+#include "math.h"
+static uint16_t x=104;   //74
+static uint16_t y=94;   //64
+float sx=0,sy=0;;
+
 float previous_errorX,previous_errorY;
+void SetPoint(uint16_t SetX,uint16_t SetY)
+{
+	x=SetX;
+	y=SetY;
+}
 int GetErrorX(void)
 {
 	return x-Get_CoordinateXResult();
@@ -12,14 +20,15 @@ int GetErrorY(void)
 }
 void PIDOut(void)
 {
-	float KpX = 80, KiX = 0.2, KdX = 1000;
-	float KpY = 80, KiY = 0.2, KdY = 1000;
+	float KpX = 60, KiX = 5, KdX = 1100;
+	float KpY = 60, KiY = 5, KdY = 1100;
 	float errorX = 0, errorY=0 ,PX = 0, IX = 0., DX = 0, PID_valueX = 0,PY = 0, IY = 0., DY = 0, PID_valueY = 0;
   errorX = GetErrorX();
   PX = errorX;
   IX = IX + errorX;
   DX = errorX - previous_errorX;
   PID_valueX = (KpX * PX) + (KiX * IX) + (KdX * DX);
+	
   previous_errorX = errorX;
 	
 	
@@ -29,8 +38,20 @@ void PIDOut(void)
   DY = errorY - previous_errorY;
   PID_valueY = (KpY * PY) + (KiY * IY) + (KdY * DY);
   previous_errorY = errorY;
-	printf("X=%f,Y=%f\n",PID_valueX,PID_valueY);
-	printf("x=%d,y=%d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
+	
+	if(fabs(errorX)<=5&&fabs(errorY)<=5)
+	{
+		ChannelTwo_SetPositon(-sx);
+		ChannelOne_SetPositon(sy);
+	}
+	else
+	{
+		sx=PID_valueX;
+		sy=PID_valueY;
+	}
+	//printf("X=%f,Y=%f\n",errorX,errorY);
+	
+//	printf("x=%d,y=%d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
 	if(Get_CoordinateXResult()>74)
 	ChannelTwo_SetPositon(-PID_valueX);
 	else
@@ -39,4 +60,6 @@ void PIDOut(void)
 	ChannelOne_SetPositon(PID_valueY);
 	else
 	ChannelOne_SetPositon(PID_valueY);
+//		ChannelOne_SetPositon(0);
+//	ChannelTwo_SetPositon(0);
 }

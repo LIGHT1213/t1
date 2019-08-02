@@ -36,13 +36,12 @@ void User_main(void)
 		/* printf 是发到调试器的 并不发到HC12 */
 		//printf("%d %d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
 		//printf("FUCK\r\n");
-	if(Is_CommandUpdate()==1)
-	{
-		//PIDOut();
-		Clear_CommandUpdateStatus();
-	}
-//	ChannelOne_SetPositon(0);
-//	ChannelTwo_SetPositon(0);
+		HAL_Delay(5000);
+		SetPoint(74,64);
+		HAL_Delay(5000);
+		SetPoint(104,94);
+	ChannelOne_SetPositon(0);
+	ChannelTwo_SetPositon(0);
 	}
 	
 }
