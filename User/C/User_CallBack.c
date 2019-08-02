@@ -16,7 +16,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	if(huart->Instance == USART1)
 	{
 		_GetErrorUartCallBack();
-	} 
+	}
+	
+	/* 串口2中断部分 */
+	if(huart->Instance == USART2)
+	{
+		_GetCommandUartCallBack();
+	}
 	
 }
 

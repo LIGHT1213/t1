@@ -22,6 +22,9 @@ void User_DebugUart_Init(void);
 /* 误差获取串口的中断服务函数 */
 void _GetErrorUartCallBack(void);
 
+/* 命令获取串口的中断服务函数 */
+void _GetCommandUartCallBack(void);
+
 /* 查询命令是否更新函数 */
 uint8_t Is_CommandUpdate(void);
 
@@ -33,5 +36,8 @@ int16_t Get_CoordinateXResult(void);
 
 /* 获取Y(或者是X明天决定)轴坐标结果 */
 int16_t Get_CoordinateYResult(void);
+
+/* 命令查询函数 返回当前调试串口的指令 */
+uint8_t Get_DebugCommand(void);
 
 #endif

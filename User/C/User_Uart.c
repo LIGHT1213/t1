@@ -5,8 +5,11 @@
 
 //私有变量
 static uint8_t _GetErrorRXBuffer[7] = {0};
+static uint8_t _GetCommandRXBuffer[2] = {0};
 static int16_t Coordinate1_One = 0 , Coordinate1_Two = 0;
 static uint8_t CommandUpdateStatus = 0;
+
+static uint8_t _DebugCommand = 0;
 
 
 /* 查询命令是否更新函数 */
@@ -45,7 +48,7 @@ void User_GetErrorUart_Init(void)
 /* 调试信息输出串口 DAP调试器虚拟串口 串口2 */
 void User_DebugUart_Init(void)
 {
-	
+	HAL_UART_Receive_IT(&huart2,_GetCommandRXBuffer,2);
 }
 
 
@@ -82,6 +85,19 @@ void _GetErrorUartCallBack(void)
 }
 
 
+/* 命令获取串口的中断服务函数 */
+void _GetCommandUartCallBack(void)
+{
+	_DebugCommand = atoi((const char*)_GetCommandRXBuffer);
+	HAL_UART_Receive_IT(&huart2,_GetCommandRXBuffer,2);
+}
+
+
+/* 命令查询函数 返回当前调试串口的指令 */
+uint8_t Get_DebugCommand(void)
+{
+	return _DebugCommand;
+}
 
 
 
