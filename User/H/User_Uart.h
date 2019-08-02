@@ -16,6 +16,9 @@
 /* 误差获取串口 串口1 HC12串口 初始化 */
 void User_GetErrorUart_Init(void);
 
+/* 调试信息输出串口 DAP调试器虚拟串口 串口2 PA2 PA3 */
+void User_DebugUart_Init(void);
+
 /* 误差获取串口的中断服务函数 */
 void _GetErrorUartCallBack(void);
 

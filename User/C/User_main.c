@@ -17,7 +17,7 @@ void User_main(void)
 	/* 图像误差获取串口初始化结束 */
 	
 	/* 调试串口初始化开始 使用无线调试器上的串口作为调试信息输出串口 */
-	
+	User_DebugUart_Init();
 	//(需要修改printf重定向部分)
 	
 	/* 调试串口初始化结束 */
@@ -33,6 +33,10 @@ void User_main(void)
 		/* 通过 Get_CoordinateXResult()获取返回的第一个三位数坐标 */
 		/* 通过 Get_CoordinateYResult()获取返回的第二个三位数坐标 */
 		/* 究竟哪个函数是X 哪个是Y 得看明天的安装情况 */
+		printf("FUCK\r\n");
+		HAL_Delay(500);
+		__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,1500);
+		__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_2,1500);
 	}
 	
 }

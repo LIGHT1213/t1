@@ -41,6 +41,12 @@ void User_GetErrorUart_Init(void)
 	HAL_UART_Receive_IT(&huart1,_GetErrorRXBuffer,7);
 }
 
+/* 调试信息输出串口 DAP调试器虚拟串口 串口2 */
+void User_DebugUart_Init(void)
+{
+	
+}
+
 
 /* 误差获取串口 UART1 HC12 OPENMV 串口 回调函数(中断处理函数) */
 void _GetErrorUartCallBack(void)
@@ -70,5 +76,30 @@ void _GetErrorUartCallBack(void)
 		//指示收到新的指令
 		CommandUpdateStatus = 1;
 	}
+}
+
+
+
+
+
+/* Retargeting printf() output to Usart2 */
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif 
+
+int fputc(int ch,FILE *f)
+{
+    uint8_t temp[1]={ch};
+    HAL_UART_Transmit(&huart2,temp,1,10);        //UartHandle是串口的句柄
+		return ch;
+}
+
+
+PUTCHAR_PROTOTYPE
+{
+	HAL_UART_Transmit(&huart2,(uint8_t*)&ch,1,10);
+	return ch;
 }
 
