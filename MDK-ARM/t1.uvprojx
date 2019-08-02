@@ -528,6 +528,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\C\User_PWM.c</FilePath>
             </File>
+            <File>
+              <FileName>User_PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\C\User_PID.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -552,6 +557,11 @@
               <FileName>User_PWM.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\H\User_PWM.h</FilePath>
+            </File>
+            <File>
+              <FileName>User_PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\H\User_PID.h</FilePath>
             </File>
           </Files>
         </Group>

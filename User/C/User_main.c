@@ -4,7 +4,7 @@
 
 #include "User_Uart.h"
 #include "User_PWM.h"
-
+#include "User_PID.h"
 void User_main(void)
 {
 	/* 舵机控制初始化开始 初始化TIM1的 CH1 CH2 PWM模式 作为舵机控制的输出端口 分别对应PA8 PA9 */
@@ -34,10 +34,15 @@ void User_main(void)
 		/* 究竟哪个函数是X 哪个是Y 得看明天的安装情况 */
 		
 		/* printf 是发到调试器的 并不发到HC12 */
-		printf("FUCK\r\n");
-		HAL_Delay(500);
-		ChannelOne_SetPositon(0.5);
-		ChannelTwo_SetPositon(0.5);
+		//printf("%d %d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
+		//printf("FUCK\r\n");
+	if(Is_CommandUpdate()==1)
+	{
+		PIDOut();
+		Clear_CommandUpdateStatus();
+	}
+//	ChannelOne_SetPositon(1);
+//	ChannelTwo_SetPositon(1);
 	}
 	
 }
