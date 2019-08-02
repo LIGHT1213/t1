@@ -36,12 +36,18 @@ void User_main(void)
 		/* printf 是发到调试器的 并不发到HC12 */
 		//printf("%d %d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
 		//printf("FUCK\r\n");
-		HAL_Delay(5000);
-		SetPoint(74,64);
-		HAL_Delay(5000);
-		SetPoint(104,94);
-	ChannelOne_SetPositon(0);
-	ChannelTwo_SetPositon(0);
+		if(Get_DebugCommand() == 0)
+		{
+			SetPoint(74,64);
+		}
+		/* 警告：使用win10商店里面那个串口调试助手将导致能收不能发 */
+		/* 正确做法是使用 sscom */
+		if(Get_DebugCommand() == 1)
+		{
+			SetPoint(104,94);
+		}
+		
+		
 	}
 	
 }

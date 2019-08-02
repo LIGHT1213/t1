@@ -5,11 +5,11 @@
 
 //私有变量
 static uint8_t _GetErrorRXBuffer[7] = {0};
-static uint8_t _GetCommandRXBuffer[2] = {0};
+uint8_t _GetCommandRXBuffer[1] = {0};
 static int16_t Coordinate1_One = 0 , Coordinate1_Two = 0;
 static uint8_t CommandUpdateStatus = 0;
 
-static uint8_t _DebugCommand = 0;
+uint8_t _DebugCommand = 0;
 
 
 /* 查询命令是否更新函数 */
@@ -45,10 +45,10 @@ void User_GetErrorUart_Init(void)
 	HAL_UART_Receive_IT(&huart1,_GetErrorRXBuffer,7);
 }
 
-/* 调试信息输出串口 DAP调试器虚拟串口 串口2 */
+/* 调试信息输出串口 DAP调试器虚拟串口 串口3 */
 void User_DebugUart_Init(void)
 {
-	HAL_UART_Receive_IT(&huart2,_GetCommandRXBuffer,2);
+	HAL_UART_Receive_IT(&huart3,_GetCommandRXBuffer,1);
 }
 
 
@@ -88,8 +88,8 @@ void _GetErrorUartCallBack(void)
 /* 命令获取串口的中断服务函数 */
 void _GetCommandUartCallBack(void)
 {
-	_DebugCommand = atoi((const char*)_GetCommandRXBuffer);
-	HAL_UART_Receive_IT(&huart2,_GetCommandRXBuffer,2);
+		_DebugCommand = _GetCommandRXBuffer[0];
+	HAL_UART_Receive_IT(&huart3,_GetCommandRXBuffer,1);
 }
 
 
@@ -101,7 +101,7 @@ uint8_t Get_DebugCommand(void)
 
 
 
-/* Retargeting printf() output to Usart2 */
+/* Retargeting printf() output to Usart3 */
 #ifdef __GNUC__
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else
@@ -111,14 +111,14 @@ uint8_t Get_DebugCommand(void)
 int fputc(int ch,FILE *f)
 {
     uint8_t temp[1]={ch};
-    HAL_UART_Transmit(&huart2,temp,1,10);        //UartHandle是串口的句柄
+    HAL_UART_Transmit(&huart3,temp,1,10);        //UartHandle是串口的句柄
 		return ch;
 }
 
 
 PUTCHAR_PROTOTYPE
 {
-	HAL_UART_Transmit(&huart2,(uint8_t*)&ch,1,10);
+	HAL_UART_Transmit(&huart3,(uint8_t*)&ch,1,10);
 	return ch;
 }
 
