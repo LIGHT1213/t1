@@ -20,7 +20,7 @@ void User_main(void)
 	/* 调试串口初始化开始 使用无线调试器上的串口作为调试信息输出串口 */
 	User_DebugUart_Init();
 	/* 调试串口初始化结束 */
-	
+	SetPoint(74, 60);
 	while(1)
 	{
 		
@@ -36,17 +36,17 @@ void User_main(void)
 		/* printf 是发到调试器的 并不发到HC12 */
 		//printf("%d %d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
 		//printf("FUCK\r\n");
-		if(Get_DebugCommand() == 0)
-		{
-			SetPoint(74,64);
-		}
-		/* 警告：使用win10商店里面那个串口调试助手将导致能收不能发 */
-		/* 正确做法是使用 sscom */
-		if(Get_DebugCommand() == 1)
-		{
-			SetPoint(104,94);
-		}
-		
+//		if(Get_DebugCommand() == 0)
+//		{
+//			SetPoint(74,64);
+//		}
+//		/* 警告：使用win10商店里面那个串口调试助手将导致能收不能发 */
+//		/* 正确做法是使用 sscom */
+//		if(Get_DebugCommand() == 1)
+//		{
+//			SetPoint(104,94);
+//		}
+DealQuestion(Get_DebugCommand());
 		
 	}
 	

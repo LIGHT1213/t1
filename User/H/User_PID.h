@@ -6,4 +6,6 @@ int GetErrorX(void);
 int GetErrorY(void);
 void SetPoint(uint16_t SetX,uint16_t SetY);
 void PIDOut(void);
+void GetCommand(uint8_t i);
+void DealQuestion(int i);
 #endif
