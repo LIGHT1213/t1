@@ -7,8 +7,8 @@ float sx = 0, sy = 0;;
 float previous_errorX, previous_errorY;
 void SetPoint(uint16_t SetX, uint16_t SetY)
 {
-    x = SetX;
-    y = SetY;
+    x = SetX+3;
+    y = SetY+8;
 }
 int GetErrorX(void)
 {
@@ -20,8 +20,8 @@ int GetErrorY(void)
 }
 void PIDOut(void)
 {
-    float KpX = 60, KiX = 0.5, KdX = 1120;
-    float KpY = 60, KiY = 0.5, KdY = 1120;
+    float KpX = 57, KiX = 5, KdX = 1120;
+    float KpY = 57, KiY = 5, KdY = 1120;
     float errorX = 0, errorY = 0, PX = 0, IX = 0., DX = 0, PID_valueX = 0, PY = 0, IY = 0., DY = 0, PID_valueY = 0;
     errorX = GetErrorX();
     PX = errorX;
@@ -113,7 +113,6 @@ void DealQuestion(int i)
 		GetCommand(1);
 		HAL_Delay(4000);
 		GetCommand(5);
-		
 		HAL_Delay(5000);
 	}
 	else if(i==3)
@@ -124,14 +123,15 @@ void DealQuestion(int i)
 		HAL_Delay(2500);
 		GetCommand(5);
 		HAL_Delay(2500);
-		while(1);
 	}
 	else if(i==4)
 	{
 		GetCommand(1);
-		HAL_Delay(4000);
+		HAL_Delay(5000);
+		GetCommand(5);
+		HAL_Delay(1000);
 		GetCommand(9);
-		while(1);
+		HAL_Delay(5000);
 	}
 	else if(i==5)
 	{
@@ -142,8 +142,7 @@ void DealQuestion(int i)
 		GetCommand(6);
 		HAL_Delay(4000);
 		GetCommand(9);
-		//HAL_Delay(2500);
-		while(1);
+		HAL_Delay(3500);
 	}
 //	else if(i==6)
 //	{
