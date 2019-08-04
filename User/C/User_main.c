@@ -46,7 +46,14 @@ void User_main(void)
 //		{
 //			SetPoint(104,94);
 //		}
-DealQuestion(Get_DebugCommand());
+
+
+		DealQuestion(Get_DebugCommand());
+		//SetPoint(163,132);
+		//ChannelOne_SetPositon(0);
+    //ChannelTwo_SetPositon(0);
+//		printf("X%d , Y%d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
+//		HAL_Delay(50);
 		
 	}
 	

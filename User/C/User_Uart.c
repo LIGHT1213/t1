@@ -56,16 +56,35 @@ void User_DebugUart_Init(void)
 void _GetErrorUartCallBack(void)
 {
 	uint8_t Coordinate1[3] ={0} ,Coordinate2[3] = {0};
+	uint8_t temp = 0 , temp2 = 0;
+	uint8_t* p = NULL;
 	
 	//把/n作为断帧符
 	if(_GetErrorRXBuffer[6] != '\n')
 	{
-		while(1)
+		//收不到正确的信息就想办法寻找正确的尾帧 '\n' 然后恢复数据
+		printf("F**k\n");
+		for(temp = 0;temp < 7;temp ++)
 		{
-			//收不到正确的信息就重启
-			printf("Fuck Your Mother 1000 Times.\r\n");
-			NVIC_SystemReset();
+			temp2 ++;
+			if(_GetErrorRXBuffer[temp] == '\n')
+			{
+ 				memset(_GetErrorRXBuffer,0x00,(temp + 1));
+				for(;(temp + 1) < 7;temp ++ )
+				{
+					p = &_GetErrorRXBuffer[temp + 1];
+					p -= temp;
+					*p = _GetErrorRXBuffer[temp + 1];
+				}
+				
+				HAL_UART_Receive_IT(&huart1,&_GetErrorRXBuffer[temp2 +1],(6 - temp2));
+				
+				return;
+			}
 		}
+	
+		HAL_UART_Receive_IT(&huart1,_GetErrorRXBuffer,7);
+		
 	}
 	else
 	{
@@ -82,6 +101,7 @@ void _GetErrorUartCallBack(void)
 		//收到新指令立即执行PID
 		PIDOut();
 	}
+	
 }
 
 
