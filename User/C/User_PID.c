@@ -7,8 +7,8 @@ float sx = 0, sy = 0;;
 float previous_errorX, previous_errorY;
 void SetPoint(uint16_t SetX, uint16_t SetY)
 {
-    x = SetX+3;
-    y = SetY+8;
+    x = SetX + 3;
+    y = SetY + 8;
 }
 int GetErrorX(void)
 {
@@ -20,8 +20,8 @@ int GetErrorY(void)
 }
 void PIDOut(void)
 {
-    float KpX = 57, KiX = 5, KdX = 1120;
-    float KpY = 57, KiY = 5, KdY = 1120;
+    float KpX = 50, KiX = 3, KdX = 1120;
+    float KpY = 50, KiY = 3, KdY = 1120;
     float errorX = 0, errorY = 0, PX = 0, IX = 0., DX = 0, PID_valueX = 0, PY = 0, IY = 0., DY = 0, PID_valueY = 0;
     errorX = GetErrorX();
     PX = errorX;
@@ -97,6 +97,30 @@ void GetCommand(uint8_t i)
     case 9:
         SetPoint(102, 88);
         break;
+    case 10:
+        SetPoint(63, 56);
+        break;
+    case 11:
+        SetPoint(73, 56);
+        break;
+    case 12:
+        SetPoint(83, 56);
+        break;
+    case 13:
+        SetPoint(63, 66);
+        break;
+    case 14:
+        SetPoint(83, 66);
+        break;
+    case 15:
+        SetPoint(63, 76);
+        break;
+    case 16:
+        SetPoint(73, 76);
+        break;
+    case 17:
+        SetPoint(83, 76);
+        break;
     default:
         SetPoint(74, 60);
         break;
@@ -104,49 +128,76 @@ void GetCommand(uint8_t i)
 }
 void DealQuestion(int i)
 {
-	if(i==1)
-	{
-		GetCommand(2);
-	}
-	else if(i==2)
-	{
-		GetCommand(1);
-		HAL_Delay(4000);
-		GetCommand(5);
-		HAL_Delay(5000);
-	}
-	else if(i==3)
-	{
-		GetCommand(1);
-		HAL_Delay(4000);
-		GetCommand(4);
-		HAL_Delay(2500);
-		GetCommand(5);
-		HAL_Delay(2500);
-	}
-	else if(i==4)
-	{
-		GetCommand(1);
-		HAL_Delay(5000);
-		GetCommand(5);
-		HAL_Delay(1000);
-		GetCommand(9);
-		HAL_Delay(5000);
-	}
-	else if(i==5)
-	{
-		GetCommand(1);
-		HAL_Delay(4000);
-		GetCommand(2);
-		HAL_Delay(4000);
-		GetCommand(6);
-		HAL_Delay(4000);
-		GetCommand(9);
-		HAL_Delay(3500);
-	}
+    if(i == 1)
+    {
+        GetCommand(2);
+    }
+    else if(i == 2)
+    {
+        GetCommand(1);
+        HAL_Delay(4000);
+        GetCommand(5);
+        HAL_Delay(5000);
+    }
+    else if(i == 3)
+    {
+        GetCommand(1);
+        HAL_Delay(4000);
+        GetCommand(4);
+        HAL_Delay(2500);
+        GetCommand(5);
+        HAL_Delay(2500);
+    }
+    else if(i == 4)
+    {
+        GetCommand(1);
+        HAL_Delay(5000);
+        GetCommand(5);
+        HAL_Delay(1000);
+        GetCommand(9);
+        HAL_Delay(5000);
+    }
+    else if(i == 5)
+    {
+        GetCommand(1);
+        HAL_Delay(4000);
+        GetCommand(2);
+        HAL_Delay(4000);
+        GetCommand(6);
+        HAL_Delay(4000);
+        GetCommand(9);
+        HAL_Delay(3500);
+    }
+    else if(i == 7)
+    {
+        GetCommand(4);
+        HAL_Delay(4000);
+        for(int i = 0; i < 3; i++)
+        {
+            GetCommand(10);
+            HAL_Delay(4000);
+            GetCommand(11);
+            HAL_Delay(4000);
+            GetCommand(12);
+            HAL_Delay(4000);
+            GetCommand(13);
+            HAL_Delay(4000);
+            GetCommand(14);
+            HAL_Delay(4000);
+            GetCommand(15);
+            HAL_Delay(4000);
+            GetCommand(16);
+            HAL_Delay(4000);
+            GetCommand(17);
+            HAL_Delay(4000);
+        }
+        HAL_Delay(4000);
+        GetCommand(9);
+        HAL_Delay(4000);
+    }
 //	else if(i==6)
 //	{
-//		
+//
 //	}
-//	else 
+//	else
 }
