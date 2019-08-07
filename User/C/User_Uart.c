@@ -99,7 +99,8 @@ void _GetErrorUartCallBack(void)
 		//指示收到新的指令
 		CommandUpdateStatus = 1;
 		//收到新指令立即执行PID
-		//PIDOut();
+		PIDOut();
+		//turn();
 	}
 	
 }
