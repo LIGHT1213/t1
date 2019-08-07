@@ -20,7 +20,7 @@ void User_main(void)
 	/* 调试串口初始化开始 使用无线调试器上的串口作为调试信息输出串口 */
 	User_DebugUart_Init();
 	/* 调试串口初始化结束 */
-	SetPoint(74, 60);
+	HAL_Delay(2000);
 	while(1)
 	{
 		
@@ -48,12 +48,15 @@ void User_main(void)
 //		}
 
 
-		DealQuestion(Get_DebugCommand());
+		//DealQuestion(Get_DebugCommand());
 		//SetPoint(163,132);
 		//ChannelOne_SetPositon(0);
     //ChannelTwo_SetPositon(0);
 //		printf("X%d , Y%d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
-//		HAL_Delay(50);
+//		HAL_Delay(1000);
+//		__HAL_TIM_SET_COMPARE(&htim1,TIM_CHANNEL_1,500);
+	//	ChannelOne_SetPositon(800);
+	turn();
 		
 	}
 	

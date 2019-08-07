@@ -6,7 +6,7 @@
 //私有变量
 static uint8_t _GetErrorRXBuffer[7] = {0};
 uint8_t _GetCommandRXBuffer[1] = {0};
-static int16_t Coordinate1_One = 0 , Coordinate1_Two = 0;
+int16_t Coordinate1_One = 0 , Coordinate1_Two = 0;
 static uint8_t CommandUpdateStatus = 0;
 
 uint8_t _DebugCommand = 0;
@@ -63,7 +63,7 @@ void _GetErrorUartCallBack(void)
 	if(_GetErrorRXBuffer[6] != '\n')
 	{
 		//收不到正确的信息就想办法寻找正确的尾帧 '\n' 然后恢复数据
-		printf("F**k\n");
+		//printf("F**k\n");
 		for(temp = 0;temp < 7;temp ++)
 		{
 			temp2 ++;
@@ -99,7 +99,7 @@ void _GetErrorUartCallBack(void)
 		//指示收到新的指令
 		CommandUpdateStatus = 1;
 		//收到新指令立即执行PID
-		PIDOut();
+		//PIDOut();
 	}
 	
 }

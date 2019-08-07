@@ -1,28 +1,20 @@
 #include "User_PID.h"
 #include "math.h"
-static uint16_t x = 104; //74
-static uint16_t y = 94; //64
+static uint16_t x = 0; //74
+static uint16_t y = 300; //64
 float sx = 0, sy = 0;;
-
+float PID_valueX=0;
 float previous_errorX, previous_errorY;
-void SetPoint(uint16_t SetX, uint16_t SetY)
-{
-    x = SetX + 3;
-    y = SetY + 8;
-}
+int value =0;
+int i=0;
 int GetErrorX(void)
 {
-    return x - Get_CoordinateXResult();
-}
-int GetErrorY(void)
-{
-    return y - Get_CoordinateYResult();
+    return  Get_CoordinateXResult()-x;
 }
 void PIDOut(void)
 {
-    float KpX = 50, KiX = 3, KdX = 1120;
-    float KpY = 50, KiY = 3, KdY = 1120;
-    float errorX = 0, errorY = 0, PX = 0, IX = 0., DX = 0, PID_valueX = 0, PY = 0, IY = 0., DY = 0, PID_valueY = 0;
+    float KpX = 7.5, KiX = 0, KdX = 30;
+    float errorX = 0, errorY = 0, PX = 0, IX = 0., DX = 0;
     errorX = GetErrorX();
     PX = errorX;
     IX = IX + errorX;
@@ -30,174 +22,32 @@ void PIDOut(void)
     PID_valueX = (KpX * PX) + (KiX * IX) + (KdX * DX);
 
     previous_errorX = errorX;
-
-
-    errorY = GetErrorY();
-    PY = errorY;
-    IY = IY + errorY;
-    DY = errorY - previous_errorY;
-    PID_valueY = (KpY * PY) + (KiY * IY) + (KdY * DY);
-    previous_errorY = errorY;
-
-    if(fabs(errorX) <= 5 && fabs(errorY) <= 5)
-    {
-        ChannelTwo_SetPositon(-sx);
-        ChannelOne_SetPositon(sy);
-    }
-    else
-    {
-        sx = PID_valueX;
-        sy = PID_valueY;
-    }
-    //printf("X=%f,Y=%f\n",errorX,errorY);
+		if(PID_valueX>800)
+			PID_valueX=800;
+				if(PID_valueX<=-800)
+			PID_valueX=-800;
+    printf("X=%f\n",errorX);
 
 //	printf("x=%d,y=%d\n",Get_CoordinateXResult(),Get_CoordinateYResult());
-    if(Get_CoordinateXResult() > 74)
-        ChannelTwo_SetPositon(-PID_valueX);
-    else
-        ChannelTwo_SetPositon(-PID_valueX);
-    if(Get_CoordinateYResult() > 64)
-        ChannelOne_SetPositon(PID_valueY);
-    else
-        ChannelOne_SetPositon(PID_valueY);
+        ChannelOne_SetPositon(PID_valueX);
+
 //    ChannelOne_SetPositon(0);
 //    ChannelTwo_SetPositon(0);
 
 
 }
+void turn(void)
+{
+	int turn_value;
+	value=Get_CoordinateXResult();
+	printf("%d\n",value);
+	while(value < 290||value>310)
+	{
+		for(i = 0;i < 1600;i++)
+	{
+		ChannelOne_SetPositon(i);
+	HAL_Delay(1);
+	}
+	}
+}
 
-void GetCommand(uint8_t i)
-{
-    switch(i)
-    {
-    case 1:
-        SetPoint(50, 34);
-        break;
-    case 2:
-        SetPoint(77, 33);
-        break;
-    case 3:
-        SetPoint(102, 34);
-        break;
-    case 4:
-        SetPoint(46, 60);
-        break;
-    case 5:
-        SetPoint(74, 60);
-        break;
-    case 6:
-        SetPoint(105, 61);
-        break;
-    case 7:
-        SetPoint(48, 85);
-        break;
-    case 8:
-        SetPoint(74, 87);
-        break;
-    case 9:
-        SetPoint(102, 88);
-        break;
-    case 10:
-        SetPoint(63, 56);
-        break;
-    case 11:
-        SetPoint(73, 56);
-        break;
-    case 12:
-        SetPoint(83, 56);
-        break;
-    case 13:
-        SetPoint(63, 66);
-        break;
-    case 14:
-        SetPoint(83, 66);
-        break;
-    case 15:
-        SetPoint(63, 76);
-        break;
-    case 16:
-        SetPoint(73, 76);
-        break;
-    case 17:
-        SetPoint(83, 76);
-        break;
-    default:
-        SetPoint(74, 60);
-        break;
-    }
-}
-void DealQuestion(int i)
-{
-    if(i == 1)
-    {
-        GetCommand(2);
-    }
-    else if(i == 2)
-    {
-        GetCommand(1);
-        HAL_Delay(4000);
-        GetCommand(5);
-        HAL_Delay(5000);
-    }
-    else if(i == 3)
-    {
-        GetCommand(1);
-        HAL_Delay(4000);
-        GetCommand(4);
-        HAL_Delay(2500);
-        GetCommand(5);
-        HAL_Delay(2500);
-    }
-    else if(i == 4)
-    {
-        GetCommand(1);
-        HAL_Delay(5000);
-        GetCommand(5);
-        HAL_Delay(1000);
-        GetCommand(9);
-        HAL_Delay(5000);
-    }
-    else if(i == 5)
-    {
-        GetCommand(1);
-        HAL_Delay(4000);
-        GetCommand(2);
-        HAL_Delay(4000);
-        GetCommand(6);
-        HAL_Delay(4000);
-        GetCommand(9);
-        HAL_Delay(3500);
-    }
-    else if(i == 7)
-    {
-        GetCommand(4);
-        HAL_Delay(4000);
-        for(int i = 0; i < 3; i++)
-        {
-            GetCommand(10);
-            HAL_Delay(4000);
-            GetCommand(11);
-            HAL_Delay(4000);
-            GetCommand(12);
-            HAL_Delay(4000);
-            GetCommand(13);
-            HAL_Delay(4000);
-            GetCommand(14);
-            HAL_Delay(4000);
-            GetCommand(15);
-            HAL_Delay(4000);
-            GetCommand(16);
-            HAL_Delay(4000);
-            GetCommand(17);
-            HAL_Delay(4000);
-        }
-        HAL_Delay(4000);
-        GetCommand(9);
-        HAL_Delay(4000);
-    }
-//	else if(i==6)
-//	{
-//
-//	}
-//	else
-}
